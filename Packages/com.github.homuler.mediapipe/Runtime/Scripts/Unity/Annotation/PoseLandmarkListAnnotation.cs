@@ -116,9 +116,9 @@ namespace Mediapipe.Unity
 
       _connectionListAnnotation.Fill(_Connections, _landmarkListAnnotation);
     }
-
     private void OnValidate()
     {
+
       ApplyLeftLandmarkColor(_leftLandmarkColor);
       ApplyRightLandmarkColor(_rightLandmarkColor);
     }
@@ -214,6 +214,15 @@ namespace Mediapipe.Unity
         }
       }
     }
+    //private void Update()
+    //{
+    //  if(_LeftLandmarks != null && _RightLandmarks != null && _LandmarkCount >0)
+    //  {
+    //    var relX = (-1) * (_landmarkListAnnotation[15].x - 0.5f);
+    //    var thumb = Ge
+
+    //  }
+    //}
 
     private void ApplyMask(BodyParts mask)
     {

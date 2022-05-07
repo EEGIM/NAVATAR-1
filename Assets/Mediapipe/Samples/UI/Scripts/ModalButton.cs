@@ -11,7 +11,7 @@ namespace Mediapipe.Unity.UI
   public class ModalButton : MonoBehaviour
   {
     [SerializeField] private GameObject _modalPanel;
-    [SerializeField] private GameObject _contents;
+    [SerializeField] private GameObject _contents; //solutionMenu
 
     private Modal modal => _modalPanel.GetComponent<Modal>();
 

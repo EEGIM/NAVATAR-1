@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.7490196}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -292,6 +292,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2286573430237446447}
     m_Modifications:
+    - target: {fileID: 173867137450816499, guid: 3bd1ffa1267fbef6fbdd99b4a8e699ff,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1816605981183307362, guid: 3bd1ffa1267fbef6fbdd99b4a8e699ff,
         type: 3}
       propertyPath: maxLines
@@ -400,7 +405,7 @@ PrefabInstance:
     - target: {fileID: 3441857903058390880, guid: 3bd1ffa1267fbef6fbdd99b4a8e699ff,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 1168
       objectReference: {fileID: 0}
     - target: {fileID: 3441857903058390880, guid: 3bd1ffa1267fbef6fbdd99b4a8e699ff,
         type: 3}
@@ -465,22 +470,22 @@ PrefabInstance:
     - target: {fileID: 6817195836431992253, guid: 3bd1ffa1267fbef6fbdd99b4a8e699ff,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6817195836431992253, guid: 3bd1ffa1267fbef6fbdd99b4a8e699ff,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7533351787154748278, guid: 3bd1ffa1267fbef6fbdd99b4a8e699ff,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7533351787154748278, guid: 3bd1ffa1267fbef6fbdd99b4a8e699ff,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7533351787154748278, guid: 3bd1ffa1267fbef6fbdd99b4a8e699ff,
         type: 3}
@@ -500,6 +505,11 @@ PrefabInstance:
     - target: {fileID: 8128863749803209789, guid: 3bd1ffa1267fbef6fbdd99b4a8e699ff,
         type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908293314071552192, guid: 3bd1ffa1267fbef6fbdd99b4a8e699ff,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

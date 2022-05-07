@@ -34,7 +34,7 @@ namespace Mediapipe.Unity.UI
           // 2 buttons in a row
           currentRow = InitializeRow();
         }
-        var button = GetButtonInRow(currentRow, (i - 1) % 2);
+        var button = GetButtonInRow(currentRow, (i - 1) % 2);//여기가 메뉴지정하는곳
 
         var buildIndex = i;
         button.transform.GetComponentInChildren<Text>().text = GetSceneNameByBuildIndex(buildIndex);
