@@ -39,8 +39,8 @@ public class IKControl : MonoBehaviour
           //animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
           animator.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, 1);
           animator.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 1);
-          //animator.SetIKHintPositionWeight(AvatarIKHint.LeftKnee, 1);
-          //animator.SetIKHintPositionWeight(AvatarIKHint.RightKnee, 1);
+          animator.SetIKHintPositionWeight(AvatarIKHint.LeftKnee, 1);
+          animator.SetIKHintPositionWeight(AvatarIKHint.RightKnee, 1);
           animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
           animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
 
@@ -50,8 +50,8 @@ public class IKControl : MonoBehaviour
           //animator.SetIKRotation(AvatarIKGoal.LeftHand, point[1].rotation);
           animator.SetIKHintPosition(AvatarIKHint.RightElbow, point[2]);
           animator.SetIKHintPosition(AvatarIKHint.LeftElbow, point[3]);
-          //animator.SetIKHintPosition(AvatarIKHint.RightKnee, point[4].position);
-          //animator.SetIKHintPosition(AvatarIKHint.LeftKnee, point[5].position);
+          animator.SetIKHintPosition(AvatarIKHint.RightKnee, point[4]);
+          animator.SetIKHintPosition(AvatarIKHint.LeftKnee, point[5]);
           animator.SetIKPosition(AvatarIKGoal.RightFoot, point[6]);
           animator.SetIKPosition(AvatarIKGoal.LeftFoot, point[7]);
 

@@ -71,20 +71,19 @@ namespace Mediapipe.Unity
 
     public void Draw(IList<NormalizedLandmark> targets, bool visualizeZ = true)
     {
-      midPoint = new Vector3(0.5f - targets[11].X , 0.5f - targets[11].Y, 0);
-      wristPoint = new Vector3(0.5f - targets[12].X, 0.5f - targets[12].Y, 0);
+      midPoint = new Vector3(0.5f - targets[11].X , 0.5f - targets[11].Y, (targets[11].Z)/2440 * 1000);
+      wristPoint = new Vector3(0.5f - targets[12].X, 0.5f - targets[12].Y, (targets[12].Z)/2440 * 1000);
       bodyPoint = new Vector3(0.5f - ((targets[11].X + targets[12].X) / 2) , 0.5f - ((targets[11].Y + targets[12].Y) / 2), zPoint);
 
       point = new Vector3[12];
-      Debug.Log("leftHand:" + targets[17].Z + "rightHand:" +targets[18].Z);
-      point[0] = new Vector3((0.5f - targets[17].X) * 2440 * 0.08f, (0.5f - targets[17].Y) * 1373 * 0.08f, zPoint);
-      point[1] = new Vector3((0.5f - targets[18].X) * 2440 * 0.08f, (0.5f - targets[18].Y) * 1373 * 0.08f, zPoint);
-      point[2] = new Vector3((0.5f - targets[13].X) * 2440 * 0.08f, (0.5f - targets[13].Y) * 1373 * 0.08f, zPoint);
-      point[3] = new Vector3((0.5f - targets[14].X) * 2440 * 0.08f, (0.5f - targets[14].Y) * 1373 * 0.08f, zPoint);
+      point[0] = new Vector3((0.5f - targets[17].X) * 2440 * 0.08f, (0.5f - targets[17].Y) * 1373 * 0.08f, zPoint + targets[17].Z * 300 * 0.08f);
+      point[1] = new Vector3((0.5f - targets[18].X) * 2440 * 0.08f, (0.5f - targets[18].Y) * 1373 * 0.08f, zPoint + targets[18].Z * 300 * 0.08f);
+      point[2] = new Vector3((0.5f - targets[13].X) * 2440 * 0.08f, (0.5f - targets[13].Y) * 1373 * 0.08f, zPoint + targets[13].Z * 300 * 0.08f);
+      point[3] = new Vector3((0.5f - targets[14].X) * 2440 * 0.08f, (0.5f - targets[14].Y) * 1373 * 0.08f, zPoint + targets[14].Z * 300 * 0.08f);
       point[4] = new Vector3((0.5f - targets[25].X) * 2440 * 0.08f, (0.5f - targets[25].Y) * 1373 * 0.08f, zPoint);
       point[5] = new Vector3((0.5f - targets[26].X) * 2440 * 0.08f, (0.5f - targets[26].Y) * 1373 * 0.08f, zPoint);
-      point[6] = new Vector3((0.5f - targets[27].X) * 2440 * 0.08f, (0.5f - targets[27].Y) * 1373 * 0.08f, zPoint);
-      point[7] = new Vector3((0.5f - targets[28].X) * 2440 * 0.08f, (0.5f - targets[28].Y) * 1373 * 0.08f, zPoint);
+      point[6] = new Vector3((0.5f - targets[29].X) * 2440 * 0.08f, (0.5f - targets[27].Y) * 1373 * 0.08f, zPoint);
+      point[7] = new Vector3((0.5f - targets[30].X) * 2440 * 0.08f, (0.5f - targets[28].Y) * 1373 * 0.08f, zPoint);
       point[8] = new Vector3((0.5f - targets[11].X) * 2440 * 0.08f, (0.5f - targets[11].Y) * 2440 * 0.08f, 0.5f - targets[11].Z);
       point[9] = new Vector3((0.5f - targets[12].X) * 2440 * 0.08f, (0.5f - targets[12].Y) * 2440 * 0.08f, 0.5f - targets[12].Z);
       point[10] = new Vector3((0.5f - targets[23].X) * 2440 * 0.08f, (0.5f - targets[23].Y) * 1373 * 0.08f, zPoint);
