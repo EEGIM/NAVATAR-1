@@ -19,6 +19,8 @@ namespace Mediapipe.Unity
     [SerializeField] private Color _color = Color.green;
     [SerializeField] private float _radius = 15.0f;
     public static float zPoint = 85f;
+    public GameObject cube;
+    public GameObject cube2;
     public static Vector3[] point =new Vector3[33];
 
     private void OnValidate()
@@ -66,23 +68,44 @@ namespace Mediapipe.Unity
       Draw(targets.Landmark, scale, visualizeZ);
     }
 
+    public float GetAngle(Vector3 vec1, Vector3 vec2)
+    {
+      float theta = Vector3.Dot(vec1, vec2) / (vec1.magnitude * vec2.magnitude);
+      Vector3 dirAngle = Vector3.Cross(vec1, vec2);
+      float angle = Mathf.Acos(theta) * Mathf.Rad2Deg;
+      if (dirAngle.z < 0.0f) angle = 360 - angle;
+      //Debug.Log("사잇각 : " + angle);
+      return angle;
+    }
+
     void targetPosition(IList<NormalizedLandmark> a)
     {
-      for(int i = 0; i<33; i++)
+      for (int i = 0; i < 33; i++)
       {
         point[i] = new Vector3((0.5f - a[i].X) * 2440 * 0.08f, (0.5f - a[i].Y) * 1373 * 0.08f, zPoint); //좌표위치와 똑같이 수정
       }
-      point[17].z = zPoint + a[17].Z * 300 * 0.08f;
-      point[18].z = zPoint + a[18].Z * 300 * 0.08f;
-      point[13].z = zPoint + a[13].Z * 300 * 0.08f;
-      point[14].z = zPoint + a[14].Z * 300 * 0.08f;
-      point[11].z = 0.5f - a[11].Z;
-      point[12].z = 0.5f - a[12].Z;
+      point[17].z = zPoint + a[17].Z * 2000 * 0.08f;
+      point[18].z = zPoint + a[18].Z * 2000 * 0.08f;
+      point[13].z = zPoint + a[13].Z * 1000 * 0.08f;
+      point[14].z = zPoint + a[14].Z * 1000 * 0.08f;
+      point[11].z = zPoint + a[11].Z * 1000 * 0.08f;
+      point[12].z = zPoint + a[12].Z * 1000 * 0.08f;
+      //cube.transform.localPosition = point[11];
+      //cube2.transform.localPosition = point[12];
+      point[24].z = a[24].Z;
+      point[26].z = a[26].Z;
+      point[28].z = a[28].Z;
     }
 
     public void Draw(IList<NormalizedLandmark> targets, bool visualizeZ = true)
     {
       targetPosition(targets);//targets을 좌표위치에맞게 형식변환
+      float angle = GetAngle(point[16] - point[14], point[12] - point[14]);
+      if (angle >= 0)
+      {
+        for(int i = 13; i <= 16; i++)
+          point[i].z = zPoint;
+      }
       GameObject.FindWithTag("Player").SendMessage("targetPosition", point);//연산량 많아지니까 사용하지말기.
 
       if (ActivateFor(targets))
