@@ -96,7 +96,6 @@ namespace Mediapipe.Unity
       }
       point[11].z = zPoint + a[11].Z * 40.0f;
       point[12].z = zPoint + a[12].Z * 40.0f;
-      Debug.Log("[18] :" + a[18].Z * 40.0f+ "/ [13] :" + a[13].Z * 40.0f + "/ [11] :" + a[11].Z * 40.0f);
       //cube2.transform.localPosition = point[17];
       point[24].z = a[24].Z;
       point[26].z = a[26].Z;

@@ -41,18 +41,16 @@ namespace Mediapipe.Unity
       avatar.transform.position = newPosition;
 
       float scale = Vector3.Magnitude(Point[11] - Point[12]) / 35; //몸 크기를 어깨 벡터 크기 비례로
-      float upbodyscale = Vector3.Magnitude(newPosition - newPosition2) /70;
+      float upbodyscale = Vector3.Magnitude(newPosition - newPosition2);
       float spinescale;
 
       Vector3 relativePos = (Point[12] - Point[11]);
       if (-10 <= relativePos.z && relativePos.z <= 10)//특정 각도까지만 몸 크기를 바꾸도록... 
       {
         avatar.transform.localScale = new Vector3(0.75f * (scale), 0.5f * (scale), 0.75f * (scale));
-        if (1.0f <= avatar.transform.localScale.y && avatar.transform.localScale.y <= 2.0f)
-        {
-          spinescale = (upbodyscale + 0.3f) / avatar.transform.localScale.y; // 아바타 크기 * 허리크기 >= 좌표상의상체길이로 허리길이를 맞춤
+        spinescale = (upbodyscale + 0.5f) / (70.37f * avatar.transform.localScale.y); // 아바타 크기 * 허리크기 >= 좌표상의상체길이로 허리길이를 맞춤
+        if(0.0f <= spinescale && spinescale <= 3.0f)
           upperbody.transform.localScale = new Vector3(1.0f, 1.0f * spinescale, 1.0f);
-        }
       }
 
 
