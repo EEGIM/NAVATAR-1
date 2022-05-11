@@ -84,14 +84,20 @@ namespace Mediapipe.Unity
       {
         point[i] = new Vector3((0.5f - a[i].X) * 2440 * 0.04f, (0.5f - a[i].Y) * 1373 * 0.04f, zPoint); //좌표위치와 똑같이 수정
       }
-      point[17].z = zPoint + a[17].Z * 40.0f;
-      point[18].z = zPoint + a[18].Z * 40.0f;
-      point[13].z = zPoint + a[13].Z * 40.0f;
-      point[14].z = zPoint + a[14].Z * 40.0f;
+      if (a[17].Z * 40.0f <= -30.0f)
+      {
+        point[17].z = zPoint + a[17].Z * 40.0f - a[11].Z * 40.0f;
+        point[13].z = zPoint + a[13].Z * 40.0f - a[11].Z * 40.0f;
+      }
+      if (a[18].Z * 40.0f <= -40.0f)
+      {
+        point[18].z = zPoint + a[18].Z * 40.0f - a[12].Z * 40.0f;
+        point[14].z = zPoint + a[14].Z * 40.0f - a[12].Z * 40.0f;
+      }
       point[11].z = zPoint + a[11].Z * 40.0f;
       point[12].z = zPoint + a[12].Z * 40.0f;
-      //cube.transform.localPosition = point[11];
-      //cube2.transform.localPosition = point[12];
+      Debug.Log("[18] :" + a[18].Z * 40.0f+ "/ [13] :" + a[13].Z * 40.0f + "/ [11] :" + a[11].Z * 40.0f);
+      //cube2.transform.localPosition = point[17];
       point[24].z = a[24].Z;
       point[26].z = a[26].Z;
       point[28].z = a[28].Z;
@@ -99,13 +105,7 @@ namespace Mediapipe.Unity
 
     public void Draw(IList<NormalizedLandmark> targets, bool visualizeZ = true)
     {
-      targetPosition(targets);//targets을 좌표위치에맞게 형식변환
-      //float angle = GetAngle(point[16] - point[14], point[12] - point[14]);
-      //if (angle >= 0)
-      //{
-      //  for(int i = 13; i <= 16; i++)
-      //    point[i].z = zPoint;
-      //}
+      targetPosition(targets);
       GameObject.FindWithTag("Player").SendMessage("targetPosition", point);//연산량 많아지니까 사용하지말기.
 
       if (ActivateFor(targets))

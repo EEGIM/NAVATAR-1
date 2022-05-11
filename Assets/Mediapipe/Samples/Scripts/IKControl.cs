@@ -9,6 +9,7 @@ public class IKControl : MonoBehaviour
 
   protected Animator animator;
   public bool ikActive = false;
+  public GameObject cube;
 
   private Vector3[] point = new Vector3[33];
   void Start()
@@ -44,9 +45,9 @@ public class IKControl : MonoBehaviour
           animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
           animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
 
-          animator.SetIKPosition(AvatarIKGoal.RightHand, point[15]);
+          animator.SetIKPosition(AvatarIKGoal.RightHand, point[17]);
           //animator.SetIKRotation(AvatarIKGoal.RightHand, point[0].rotation);
-          animator.SetIKPosition(AvatarIKGoal.LeftHand, point[16]);
+          animator.SetIKPosition(AvatarIKGoal.LeftHand, point[18]);
           //animator.SetIKRotation(AvatarIKGoal.LeftHand, point[1].rotation);
           //animator.SetIKHintPosition(AvatarIKHint.RightElbow, point[13]);
           //animator.SetIKHintPosition(AvatarIKHint.LeftElbow, point[14]);
