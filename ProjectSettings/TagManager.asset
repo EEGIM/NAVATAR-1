@@ -12,9 +12,9 @@ TagManager:
   - 
   - Water
   - UI
-  - MyStencilLayer1
-  - MyStencilLayer2
-  - 
+  - Test
+  - Test2
+  - Test3
   - 
   - 
   - 
@@ -41,4 +41,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Test
+    uniqueID: 1767542827
+    locked: 0
+  - name: Test2
+    uniqueID: 1423935439
+    locked: 0
+  - name: UI
+    uniqueID: 1380754305
     locked: 0

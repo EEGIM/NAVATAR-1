@@ -84,7 +84,7 @@ namespace Mediapipe.Unity
       {
         point[i] = new Vector3((0.5f - a[i].X) * 2440 * 0.04f, (0.5f - a[i].Y) * 1373 * 0.04f, zPoint); //좌표위치와 똑같이 수정
       }
-      if (a[17].Z * 40.0f <= -30.0f)
+      if (a[17].Z * 40.0f <= -35.0f)
       {
         point[17].z = zPoint + a[17].Z * 40.0f - a[11].Z * 40.0f;
         point[13].z = zPoint + a[13].Z * 40.0f - a[11].Z * 40.0f;
