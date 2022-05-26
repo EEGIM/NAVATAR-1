@@ -11,15 +11,18 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Mediapipe/Samples/ChangeScene/1_MainScene 1.unity
+    guid: 12b47c0b19d2b4a40b0ffe622023ceae
+  - enabled: 1
+    path: Assets/Mediapipe/Samples/URP/1_1SignInScene.unity
+    guid: 8735530e63f53c342847d6d4a94c9c80
+  - enabled: 1
+    path: Assets/Mediapipe/Samples/ChangeScene/MenuScene.unity
+    guid: a5e247976e684c3438e96830e4a1c4c4
+  - enabled: 1
+    path: Assets/Mediapipe/Samples/ChangeScene/UserInfoScene.unity
+    guid: b845334fe2c59c24f898344f4bce6578
   - enabled: 1
     path: Assets/Mediapipe/Samples/Scenes/Pose Tracking/Pose Tracking.unity
     guid: a4964d5b8866fb3d8bd4c715728200c8
@@ -29,21 +32,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Mediapipe/Samples/Scenes/Hair Segmentation/Hair Segmentation.unity
     guid: 1192e7a0a46750eb78550919cccb0270
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
