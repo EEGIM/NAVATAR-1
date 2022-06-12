@@ -23,7 +23,7 @@ namespace Mediapipe.Unity
     // Start is called before the first frame update
     void Start()
     {
-      uplegscale = rupperarm.transform.localScale.y;
+      //uplegscale = rupperarm.transform.localScale.y;
     }
 
     void targetPosition(Vector3[] a)
@@ -40,19 +40,21 @@ namespace Mediapipe.Unity
       Vector3 newPosition2 = new Vector3((Point[11].x + Point[12].x) / 2, (Point[11].y + Point[12].y) / 2, zPoint);
       avatar.transform.position = newPosition;
 
-      float scale = Vector3.Magnitude(Point[11] - Point[12]) / 35; //몸 크기를 어깨 벡터 크기 비례로
+      float scale = Vector3.Magnitude(Point[11] - Point[12]) / 25; //몸 크기를 어깨 벡터 크기 비례로
+      float scale2 = Vector3.Magnitude(Point[28] - Point[24]) / 25;
       float upbodyscale = Vector3.Magnitude(newPosition - newPosition2);
-      float spinescale;
+      //Debug.Log("upbodyScale:" +upbodyscale+ "scale:" +scale +"upbodyScale/scale:" + (upbodyscale / scale / 25));
+      Debug.Log("upbodyScale:" + upbodyscale + "scale2:" + scale2 + "upbodyScale/scale2:" + (upbodyscale / scale2 / 25));
+      float a = 0.0f;
+      if (scale <= 1.0f)
+        a = 0.1f;
 
       Vector3 relativePos = (Point[12] - Point[11]);
       if (-10 <= relativePos.z && relativePos.z <= 10)//특정 각도까지만 몸 크기를 바꾸도록... 
       {
-        avatar.transform.localScale = new Vector3(0.75f * (scale), 0.5f * (scale), 0.75f * (scale));
-        spinescale = (upbodyscale + 0.5f) / (70.37f * avatar.transform.localScale.y); // 아바타 크기 * 허리크기 >= 좌표상의상체길이로 허리길이를 맞춤
-        if(0.0f <= spinescale && spinescale <= 3.0f)
-          upperbody.transform.localScale = new Vector3(1.0f, 1.0f * spinescale, 1.0f);
+        avatar.transform.localScale = new Vector3(scale,0.7f * scale, scale);
+        upperbody.transform.localScale = new Vector3(1.2f, 1.0f * (upbodyscale / scale / 25 + a), 1.0f);
       }
-
 
       //float scale2 = (Vector3.Magnitude(Point[12] - Point[14]) + Vector3.Magnitude(Point[14] - Point[18])) / 120;
       //rupperarm.transform.localScale = new Vector3(1.0f, uplegscale * scale2, 1.0f);

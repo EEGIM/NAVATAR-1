@@ -19,10 +19,11 @@ namespace Mediapipe.Unity
     [SerializeField] private Color _color = Color.green;
     [SerializeField] private float _radius = 15.0f;
     public static float zPoint = 80f;
+    public static Vector3[] point =new Vector3[33];
+    public GameObject canvas;
+    public float foot = 85.0f;
     public GameObject cube;
     public GameObject cube2;
-    public static Vector3[] point =new Vector3[33];
-
     private void OnValidate()
     {
       ApplyColor(_color);
@@ -80,26 +81,32 @@ namespace Mediapipe.Unity
 
     void targetPosition(IList<NormalizedLandmark> a)
     {
+      RectTransform rt = canvas.GetComponent<RectTransform>();
+      //Debug.Log("width:" + rt.rect.width + "height:" + rt.rect.height + "anchor:" + (float)rt.localScale.x);
       for (int i = 0; i < 33; i++)
       {
-        point[i] = new Vector3((0.5f - a[i].X) * 2440 * 0.04f, (0.5f - a[i].Y) * 1373 * 0.04f, zPoint); //좌표위치와 똑같이 수정
+        point[i] = new Vector3((0.5f - a[i].X) * 2440 * 0.04f, (0.5f - a[i].Y) * 1275 * 0.04f, zPoint); //좌표위치와 똑같이 수정, 캔버스 크기가 바뀌더라도 고치면 안됨.
+                                                                                                        //좌표의 위치를 결정짓는 실제 스크린 크기는 변하지 않으므로 
       }
-      if (a[17].Z * 40.0f <= -35.0f)
-      {
-        point[17].z = zPoint + a[17].Z * 40.0f - a[11].Z * 40.0f;
-        point[13].z = zPoint + a[13].Z * 40.0f - a[11].Z * 40.0f;
-      }
-      if (a[18].Z * 40.0f <= -40.0f)
-      {
-        point[18].z = zPoint + a[18].Z * 40.0f - a[12].Z * 40.0f;
-        point[14].z = zPoint + a[14].Z * 40.0f - a[12].Z * 40.0f;
-      }
-      point[11].z = zPoint + a[11].Z * 40.0f;
-      point[12].z = zPoint + a[12].Z * 40.0f;
-      //cube2.transform.localPosition = point[17];
-      point[24].z = a[24].Z;
-      point[26].z = a[26].Z;
-      point[28].z = a[28].Z;
+      //if (a[17].Z * 40.0f <= -35.0f)
+      //{
+      //  point[17].z = zPoint + a[17].Z * 40.0f - a[11].Z * 40.0f;
+      //  point[13].z = zPoint + a[13].Z * 40.0f - a[11].Z * 40.0f;
+      //}
+      //if (a[18].Z * 40.0f <= -40.0f)
+      //{
+      //  point[18].z = zPoint + a[18].Z * 40.0f - a[12].Z * 40.0f;
+      //  point[14].z = zPoint + a[14].Z * 40.0f - a[12].Z * 40.0f;
+      //}
+      point[29].z = foot;
+      point[30].z = foot;
+      point[17].z = foot;
+      point[18].z = foot;
+      ////point[11].z = zPoint + a[11].Z * 40.0f;
+      ////point[12].z = zPoint + a[12].Z * 40.0f;
+      //point[24].z = a[24].Z;
+      //point[26].z = a[26].Z;
+      //point[28].z = a[28].Z;
     }
 
     public void Draw(IList<NormalizedLandmark> targets, bool visualizeZ = true)
