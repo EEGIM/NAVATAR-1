@@ -15,29 +15,17 @@ namespace Mediapipe.Unity
     public GameObject avatar;
     private static float legscale;
     private Vector3[] Point = new Vector3[33];
-
     private float zPoint = 80f;
-    float uplegscale;
 
     // Start is called before the first frame update
     void Start()
     {
-      //uplegscale = rupperarm.transform.localScale.y;
     }
 
     void targetPosition(Vector3[] a)
     {
       Point = a;
-      //float scale = Vector3.Magnitude(a[11] - a[12]) / 25; //몸 크기를 어깨 벡터 크기 비례로
-      //float lscale = Vector3.Magnitude(a[23] - a[27]);
-      //legscale = lscale / scale;
-      //Debug.Log("lscale/scale:" + legscale);
     }
-    void legScale(float b)
-    {
-      legscale = b;
-    }
-
 
     // Update is called once per frame
     void Update()
@@ -53,7 +41,6 @@ namespace Mediapipe.Unity
       float urscale = Vector3.Magnitude(Point[11] - Point[13]) / 25;
       float drscale = Vector3.Magnitude(Point[15] - Point[13]) / 25;
       float upbodyscale = Vector3.Magnitude(newPosition - newPosition2);
-      //Debug.Log("upbodyscale:" + upbodyscale + "scale:" + scale + "up/scale:" + upbodyscale / scale); 
 
       Vector3 relativePos = (Point[12] - Point[11]);
       if (-10 <= relativePos.z && relativePos.z <= 10)//특정 각도까지만 몸 크기를 바꾸도록... 
@@ -72,10 +59,6 @@ namespace Mediapipe.Unity
           //rdownarm.transform.localScale = new Vector3(1.0f, 1.54f * (drscale / scale), 1.0f);
         }
       }
-
-      //float scale2 = (Vector3.Magnitude(Point[12] - Point[14]) + Vector3.Magnitude(Point[14] - Point[18])) / 120;
-      //rupperarm.transform.localScale = new Vector3(1.0f, uplegscale * scale2, 1.0f);
-      //lupperarm.transform.localScale = new Vector3(1.0f, uplegscale * scale2, 1.0f);
     }
   }
 

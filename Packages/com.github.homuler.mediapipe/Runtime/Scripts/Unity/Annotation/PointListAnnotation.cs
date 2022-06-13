@@ -77,7 +77,6 @@ namespace Mediapipe.Unity
       Vector3 dirAngle = Vector3.Cross(vec1, vec2);
       float angle = Mathf.Acos(theta) * Mathf.Rad2Deg;
       if (dirAngle.z < 0.0f) angle = 360 - angle;
-      //Debug.Log("사잇각 : " + angle);
       return angle;
     }
 
@@ -86,44 +85,18 @@ namespace Mediapipe.Unity
       point [23] = new Vector3(a[23].X, a[23].Y, a[23].Z);
       point[24] = new Vector3(a[24].X, a[24].Y, a[24].Z);
       point[27] = new Vector3(a[27].X, a[27].Y, a[27].Z);
-      float scale = Vector3.Magnitude(point[23] - point[24]);
-      float lscale = Vector3.Magnitude(point[23] - point[27]);
-      legscale = lscale / scale;
+      legscale = Vector3.Magnitude(point[23] - point[27]) / Vector3.Magnitude(point[23] - point[24]);
       for (int i = 0; i < 33; i++)
       {
         point[i] = new Vector3((0.5f - a[i].X) * 2440 * 0.04f, (0.5f - a[i].Y) * 1275 * 0.04f, zPoint); //좌표위치와 똑같이 수정, 캔버스 크기가 바뀌더라도 고치면 안됨.
                                                                                               //좌표의 위치를 결정짓는 실제 스크린 크기는 변하지 않으므로 
       }
-      //if (a[17].Z * 40.0f <= -35.0f)
-      //{
-      //  point[17].z = zPoint + a[17].Z * 40.0f - a[11].Z * 40.0f;
-      //  point[13].z = zPoint + a[13].Z * 40.0f - a[11].Z * 40.0f;
-      //}
-      //if (a[18].Z * 40.0f <= -40.0f)
-      //{
-      //  point[18].z = zPoint + a[18].Z * 40.0f - a[12].Z * 40.0f;
-      //  point[14].z = zPoint + a[14].Z * 40.0f - a[12].Z * 40.0f;
-      //}
-      //point[29].z = foot;
-      //point[30].z = foot;
-      //point[13].z = foot;
-      //point[14].z = foot;
-      //point[15].z = 85 + (a[15].Z + 0.3f) * 40.0f;
-      //point[16].z = 85 + (a[16].Z + 0.5f) * 30.0f;
       point[11].z = foot;
       point[12].z = foot;
       point[23].z = foot;
       point[24].z = foot;//팔다리 위치를 결정시켜줌으로 중요
       point[29].z = 85.0f;
       point[30].z = 85.0f;
-      //cube.transform.localPosition = point[14];
-      //cube2.transform.localPosition = point[18];
-      //cube3.transform.localPosition = point[12];
-      ////point[11].z = zPoint + a[11].Z * 40.0f;
-      ////point[12].z = zPoint + a[12].Z * 40.0f;
-      //point[24].z = a[24].Z;
-      //point[26].z = a[26].Z;
-      //point[28].z = a[28].Z;
     }
 
     public void Draw(IList<NormalizedLandmark> targets, bool visualizeZ = true)

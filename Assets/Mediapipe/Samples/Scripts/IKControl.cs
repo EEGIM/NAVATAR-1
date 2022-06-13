@@ -48,18 +48,13 @@ public class IKControl : MonoBehaviour
           animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
           animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
 
-          //cube.transform.position = new Vector3(cube.transform.position.x, cube.transform.position.y, point[15].z);
-          //animator.SetIKPosition(AvatarIKGoal.RightHand, cube.transform.position);
           animator.SetIKPosition(AvatarIKGoal.RightHand, point[17]);
           //animator.SetIKRotation(AvatarIKGoal.RightHand, point[17]);
-          //animator.SetIKPosition(AvatarIKGoal.LeftHand, cube2.transform.position);
           animator.SetIKPosition(AvatarIKGoal.LeftHand, point[18]);
           //animator.SetIKRotation(AvatarIKGoal.LeftHand, point[18]);
-          //Debug.Log("RightHand:" +point[15]);
           //animator.SetIKHintPosition(AvatarIKHint.RightElbow, new Vector3(point[13].x, point[13].y - 25.0f, point[13].z));
           animator.SetIKHintPosition(AvatarIKHint.RightElbow, (point[11] + point[23]) / 2);
           animator.SetIKHintPosition(AvatarIKHint.LeftElbow, (point[12] + point[24]) / 2);
-          //cube.transform.localPosition = (point[11] + point[23]) / 2;
           //animator.SetIKHintPosition(AvatarIKHint.RightKnee, point[25]);
           //animator.SetIKHintPosition(AvatarIKHint.LeftKnee, point[26]);
           animator.SetIKPosition(AvatarIKGoal.RightFoot, point[29]);
