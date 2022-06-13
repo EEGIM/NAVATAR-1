@@ -9,12 +9,11 @@ namespace Mediapipe.Unity
   public class Controller : ListAnnotation<PointAnnotation>
   {
     public LineRenderer line;
-    public GameObject rupperarm;
-    public GameObject rdownarm;
-    public GameObject lupperarm;
-    public GameObject ldownarm;
+    public GameObject rupperarm; public GameObject rdownarm; public GameObject lupperarm; public GameObject ldownarm;
+    public GameObject rupperleg; public GameObject rdownleg; public GameObject lupperleg; public GameObject ldownleg;
     public GameObject upperbody;
     public GameObject avatar;
+    private static float legscale;
     private Vector3[] Point = new Vector3[33];
 
     private float zPoint = 80f;
@@ -29,31 +28,49 @@ namespace Mediapipe.Unity
     void targetPosition(Vector3[] a)
     {
       Point = a;
+      //float scale = Vector3.Magnitude(a[11] - a[12]) / 25; //몸 크기를 어깨 벡터 크기 비례로
+      //float lscale = Vector3.Magnitude(a[23] - a[27]);
+      //legscale = lscale / scale;
+      //Debug.Log("lscale/scale:" + legscale);
     }
+    void legScale(float b)
+    {
+      legscale = b;
+    }
+
 
     // Update is called once per frame
     void Update()
     {
       targetPosition(PointListAnnotation.point);
+      legscale = PointListAnnotation.legscale / 9.17f;
 
       Vector3 newPosition = new Vector3((Point[23].x + Point[24].x)/2, (Point[23].y + Point[24].y) / 2, zPoint);
       Vector3 newPosition2 = new Vector3((Point[11].x + Point[12].x) / 2, (Point[11].y + Point[12].y) / 2, zPoint);
       avatar.transform.position = newPosition;
 
       float scale = Vector3.Magnitude(Point[11] - Point[12]) / 25; //몸 크기를 어깨 벡터 크기 비례로
-      float scale2 = Vector3.Magnitude(Point[28] - Point[24]) / 25;
+      float urscale = Vector3.Magnitude(Point[11] - Point[13]) / 25;
+      float drscale = Vector3.Magnitude(Point[15] - Point[13]) / 25;
       float upbodyscale = Vector3.Magnitude(newPosition - newPosition2);
-      //Debug.Log("upbodyScale:" +upbodyscale+ "scale:" +scale +"upbodyScale/scale:" + (upbodyscale / scale / 25));
-      Debug.Log("upbodyScale:" + upbodyscale + "scale2:" + scale2 + "upbodyScale/scale2:" + (upbodyscale / scale2 / 25));
-      float a = 0.0f;
-      if (scale <= 1.0f)
-        a = 0.1f;
+      //Debug.Log("upbodyscale:" + upbodyscale + "scale:" + scale + "up/scale:" + upbodyscale / scale); 
 
       Vector3 relativePos = (Point[12] - Point[11]);
       if (-10 <= relativePos.z && relativePos.z <= 10)//특정 각도까지만 몸 크기를 바꾸도록... 
       {
-        avatar.transform.localScale = new Vector3(scale,0.7f * scale, scale);
-        upperbody.transform.localScale = new Vector3(1.2f, 1.0f * (upbodyscale / scale / 25 + a), 1.0f);
+        avatar.transform.localScale = new Vector3(scale,scale, scale);
+        if(0.0f < scale && scale <= 3.0f) //이 조건 없으면 에러뜸
+        {
+          upperbody.transform.localScale = new Vector3(1.2f, 1.0f * (upbodyscale / scale / 25), 1.0f);
+          lupperleg.transform.localScale = new Vector3(1.0f, legscale, 1.0f);
+          rupperleg.transform.localScale = new Vector3(1.0f, legscale, 1.0f);
+          //ldownleg.transform.localScale = new Vector3(1.0f, dlscale / scale / 0.81f, 1.0f);
+          //rdownleg.transform.localScale = new Vector3(1.0f, dlscale / scale / 0.81f, 1.0f);
+          //lupperarm.transform.localScale = new Vector3(1.0f, 0.84f * (urscale / scale), 1.0f);
+          //rupperarm.transform.localScale = new Vector3(1.0f, 0.84f * (urscale / scale), 1.0f);
+          //ldownarm.transform.localScale = new Vector3(1.0f, 1.54f * (drscale / scale), 1.0f);
+          //rdownarm.transform.localScale = new Vector3(1.0f, 1.54f * (drscale / scale), 1.0f);
+        }
       }
 
       //float scale2 = (Vector3.Magnitude(Point[12] - Point[14]) + Vector3.Magnitude(Point[14] - Point[18])) / 120;

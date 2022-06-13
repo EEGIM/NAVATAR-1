@@ -10,6 +10,9 @@ public class IKControl : MonoBehaviour
   protected Animator animator;
   public bool ikActive = false;
   public GameObject cube;
+    public GameObject cube2;
+    public GameObject cube3;
+
 
   private Vector3[] point = new Vector3[33];
   void Start()
@@ -37,40 +40,46 @@ public class IKControl : MonoBehaviour
           animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
           //animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
           animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
-          //animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
-          //animator.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, 1);
-          //animator.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 1);
+          //sanimator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
+          animator.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, 1);
+          animator.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 1);
           //animator.SetIKHintPositionWeight(AvatarIKHint.LeftKnee, 1);
           //animator.SetIKHintPositionWeight(AvatarIKHint.RightKnee, 1);
           animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
           animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
 
+          //cube.transform.position = new Vector3(cube.transform.position.x, cube.transform.position.y, point[15].z);
+          //animator.SetIKPosition(AvatarIKGoal.RightHand, cube.transform.position);
           animator.SetIKPosition(AvatarIKGoal.RightHand, point[17]);
-          //animator.SetIKRotation(AvatarIKGoal.RightHand, point[0].rotation);
+          //animator.SetIKRotation(AvatarIKGoal.RightHand, point[17]);
+          //animator.SetIKPosition(AvatarIKGoal.LeftHand, cube2.transform.position);
           animator.SetIKPosition(AvatarIKGoal.LeftHand, point[18]);
-          //animator.SetIKRotation(AvatarIKGoal.LeftHand, point[1].rotation);
-          //animator.SetIKHintPosition(AvatarIKHint.RightElbow, point[13]);
-          //animator.SetIKHintPosition(AvatarIKHint.LeftElbow, point[14]);
+          //animator.SetIKRotation(AvatarIKGoal.LeftHand, point[18]);
+          //Debug.Log("RightHand:" +point[15]);
+          //animator.SetIKHintPosition(AvatarIKHint.RightElbow, new Vector3(point[13].x, point[13].y - 25.0f, point[13].z));
+          animator.SetIKHintPosition(AvatarIKHint.RightElbow, (point[11] + point[23]) / 2);
+          animator.SetIKHintPosition(AvatarIKHint.LeftElbow, (point[12] + point[24]) / 2);
+          //cube.transform.localPosition = (point[11] + point[23]) / 2;
           //animator.SetIKHintPosition(AvatarIKHint.RightKnee, point[25]);
           //animator.SetIKHintPosition(AvatarIKHint.LeftKnee, point[26]);
           animator.SetIKPosition(AvatarIKGoal.RightFoot, point[29]);
           animator.SetIKPosition(AvatarIKGoal.LeftFoot, point[30]);
 
-          Vector3 relativePos = (point[12]- point[11]);//어깨선 기준으로 vector값 추출
-          //Debug.Log("relativePos.z:" + relativePos.z * (-1.0f));
-          Quaternion rotation = Quaternion.Euler(new Vector3(0, 180 + relativePos.z * (-1.2f), 0));
-          animator.bodyRotation = rotation;//몸통 돌리기
+          //Vector3 relativePos = (point[12]- point[11]);//어깨선 기준으로 vector값 추출
+          ////Debug.Log("relativePos.z:" + relativePos.z * (-1.0f));
+          //Quaternion rotation = Quaternion.Euler(new Vector3(0, 180 + relativePos.z * (-1.2f), 0));
+          //animator.bodyRotation = rotation;//몸통 돌리기
         }
 
       }
 
       //if the IK is not active, set the position and rotation of the hand and head back to the original position
-      else
-      {
-        animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
-        animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 0);
-        animator.SetLookAtWeight(0);
-      }
+      //else
+      //{
+      //  animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
+      //  animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 0);
+      //  animator.SetLookAtWeight(0);
+      //}
     }
   }
 }

@@ -21,9 +21,11 @@ namespace Mediapipe.Unity
     public static float zPoint = 80f;
     public static Vector3[] point =new Vector3[33];
     public GameObject canvas;
-    public float foot = 85.0f;
+    public float foot;
+    public static float legscale;
     public GameObject cube;
     public GameObject cube2;
+    public GameObject cube3;
     private void OnValidate()
     {
       ApplyColor(_color);
@@ -81,12 +83,16 @@ namespace Mediapipe.Unity
 
     void targetPosition(IList<NormalizedLandmark> a)
     {
-      RectTransform rt = canvas.GetComponent<RectTransform>();
-      //Debug.Log("width:" + rt.rect.width + "height:" + rt.rect.height + "anchor:" + (float)rt.localScale.x);
+      point [23] = new Vector3(a[23].X, a[23].Y, a[23].Z);
+      point[24] = new Vector3(a[24].X, a[24].Y, a[24].Z);
+      point[27] = new Vector3(a[27].X, a[27].Y, a[27].Z);
+      float scale = Vector3.Magnitude(point[23] - point[24]);
+      float lscale = Vector3.Magnitude(point[23] - point[27]);
+      legscale = lscale / scale;
       for (int i = 0; i < 33; i++)
       {
         point[i] = new Vector3((0.5f - a[i].X) * 2440 * 0.04f, (0.5f - a[i].Y) * 1275 * 0.04f, zPoint); //좌표위치와 똑같이 수정, 캔버스 크기가 바뀌더라도 고치면 안됨.
-                                                                                                        //좌표의 위치를 결정짓는 실제 스크린 크기는 변하지 않으므로 
+                                                                                              //좌표의 위치를 결정짓는 실제 스크린 크기는 변하지 않으므로 
       }
       //if (a[17].Z * 40.0f <= -35.0f)
       //{
@@ -98,10 +104,21 @@ namespace Mediapipe.Unity
       //  point[18].z = zPoint + a[18].Z * 40.0f - a[12].Z * 40.0f;
       //  point[14].z = zPoint + a[14].Z * 40.0f - a[12].Z * 40.0f;
       //}
-      point[29].z = foot;
-      point[30].z = foot;
-      point[17].z = foot;
-      point[18].z = foot;
+      //point[29].z = foot;
+      //point[30].z = foot;
+      //point[13].z = foot;
+      //point[14].z = foot;
+      //point[15].z = 85 + (a[15].Z + 0.3f) * 40.0f;
+      //point[16].z = 85 + (a[16].Z + 0.5f) * 30.0f;
+      point[11].z = foot;
+      point[12].z = foot;
+      point[23].z = foot;
+      point[24].z = foot;//팔다리 위치를 결정시켜줌으로 중요
+      point[29].z = 85.0f;
+      point[30].z = 85.0f;
+      //cube.transform.localPosition = point[14];
+      //cube2.transform.localPosition = point[18];
+      //cube3.transform.localPosition = point[12];
       ////point[11].z = zPoint + a[11].Z * 40.0f;
       ////point[12].z = zPoint + a[12].Z * 40.0f;
       //point[24].z = a[24].Z;
@@ -112,7 +129,7 @@ namespace Mediapipe.Unity
     public void Draw(IList<NormalizedLandmark> targets, bool visualizeZ = true)
     {
       targetPosition(targets);
-      GameObject.FindWithTag("Player").SendMessage("targetPosition", point);//연산량 많아지니까 사용하지말기.
+      GameObject.FindWithTag("Player").SendMessage("targetPosition", point);
 
       if (ActivateFor(targets))
       {
