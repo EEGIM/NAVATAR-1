@@ -91,10 +91,14 @@ namespace Mediapipe.Unity
         point[i] = new Vector3((0.5f - a[i].X) * 2440 * 0.04f, (0.5f - a[i].Y) * 1275 * 0.04f, zPoint); //좌표위치와 똑같이 수정, 캔버스 크기가 바뀌더라도 고치면 안됨.
                                                                                               //좌표의 위치를 결정짓는 실제 스크린 크기는 변하지 않으므로 
       }
-      point[11].z = foot;
-      point[12].z = foot;
-      point[23].z = foot;
-      point[24].z = foot;//팔다리 위치를 결정시켜줌으로 중요
+      //point[11].z = foot;
+      //point[12].z = foot;
+      //point[23].z = foot;
+      //point[24].z = foot;//팔다리 위치를 결정시켜줌으로 중요
+      for (int i = 13; i < 23; i++)
+      {
+        point[i].z = 85.0f;
+      }
       point[29].z = 85.0f;
       point[30].z = 85.0f;
     }

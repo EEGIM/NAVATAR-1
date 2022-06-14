@@ -48,7 +48,7 @@ namespace Mediapipe.Unity
         avatar.transform.localScale = new Vector3(scale,scale, scale);
         if(0.0f < scale && scale <= 3.0f) //이 조건 없으면 에러뜸
         {
-          upperbody.transform.localScale = new Vector3(1.2f, 1.0f * (upbodyscale / scale / 25), 1.0f);
+          upperbody.transform.localScale = new Vector3(1.2f, 1.10f * (upbodyscale / scale / 25), 1.0f);
           lupperleg.transform.localScale = new Vector3(1.0f, legscale, 1.0f);
           rupperleg.transform.localScale = new Vector3(1.0f, legscale, 1.0f);
           //ldownleg.transform.localScale = new Vector3(1.0f, dlscale / scale / 0.81f, 1.0f);
