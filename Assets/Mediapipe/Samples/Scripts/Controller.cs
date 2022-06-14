@@ -40,7 +40,7 @@ namespace Mediapipe.Unity
       avatar.transform.position = newPosition;
 
       float scale = Vector3.Magnitude(Point[11] - Point[12]) / 25; //몸 크기를 어깨 벡터 크기 비례로
-      //Debug.Log("scale:" + scale);
+      Debug.Log("scale:" + scale + "25.0f + (scale - 0.5) * 4.0f:" + (25.0f + (scale - 0.5) * 4.0f));
       float urscale = Vector3.Magnitude(Point[11] - Point[13]) / 25;
       float drscale = Vector3.Magnitude(Point[15] - Point[13]) / 25;
       float upbodyscale = Vector3.Magnitude(newPosition - newPosition2);
@@ -51,7 +51,7 @@ namespace Mediapipe.Unity
         avatar.transform.localScale = new Vector3(scale,scale, scale);
         if(0.0f < scale && scale <= 3.0f) //이 조건 없으면 에러뜸
         {
-          upperbody.transform.localScale = new Vector3(1.2f, 1.10f * (upbodyscale / scale / 30), 1.0f); //가까이있을땐 30나누고 멀땐 25
+          upperbody.transform.localScale = new Vector3(1.1f, 1.10f * (upbodyscale / scale / (26.0f + (scale - 0.5f) * 4.0f)), 1.0f); //가까이있을땐 30나누고 멀땐 25
           lupperleg.transform.localScale = new Vector3(1.0f, legscale, 1.0f);
           rupperleg.transform.localScale = new Vector3(1.0f, legscale, 1.0f);
           //ldownleg.transform.localScale = new Vector3(1.0f, dlscale / scale / 0.81f, 1.0f);

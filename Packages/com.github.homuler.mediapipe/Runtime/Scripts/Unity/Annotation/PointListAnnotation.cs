@@ -93,7 +93,7 @@ namespace Mediapipe.Unity
         point[i] = new Vector3((0.5f - a[i].X) * 2440 * 0.04f, (0.5f - a[i].Y) * 1275 * 0.04f, zPoint); //좌표위치와 똑같이 수정, 캔버스 크기가 바뀌더라도 고치면 안됨.
                                                                                               //좌표의 위치를 결정짓는 실제 스크린 크기는 변하지 않으므로 
       }
-      Debug.Log("point[15]:" + point[15]);
+      //Debug.Log("point[15]:" + point[15]);
       for (int i = 15; i < 23; i++)
       {
         point[i].z = zPoint + (25.0f * (a[i].Z + 0.3f));//z값 받아서 그것을 화면에 반영했을때 이상적인 비율 곱함
