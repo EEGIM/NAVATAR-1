@@ -40,7 +40,6 @@ namespace Mediapipe.Unity
       avatar.transform.position = newPosition;
 
       float scale = Vector3.Magnitude(Point[11] - Point[12]) / 25; //몸 크기를 어깨 벡터 크기 비례로
-      Debug.Log("scale:" + scale + "25.0f + (scale - 0.5) * 4.0f:" + (25.0f + (scale - 0.5) * 4.0f));
       float urscale = Vector3.Magnitude(Point[11] - Point[13]) / 25;
       float drscale = Vector3.Magnitude(Point[15] - Point[13]) / 25;
       float upbodyscale = Vector3.Magnitude(newPosition - newPosition2);

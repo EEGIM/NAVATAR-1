@@ -94,9 +94,10 @@ namespace Mediapipe.Unity
                                                                                               //좌표의 위치를 결정짓는 실제 스크린 크기는 변하지 않으므로 
       }
       //Debug.Log("point[15]:" + point[15]);
-      for (int i = 15; i < 23; i++)
+      for (int i = 13; i < 23; i++)
       {
-        point[i].z = zPoint + (25.0f * (a[i].Z + 0.3f));//z값 받아서 그것을 화면에 반영했을때 이상적인 비율 곱함
+        point[i].z = 105.0f;
+        //point[i].z = zPoint + (20.0f * (a[i].Z + 0.3f));//z값 받아서 그것을 화면에 반영했을때 이상적인 비율 곱함
       }
     }
 
