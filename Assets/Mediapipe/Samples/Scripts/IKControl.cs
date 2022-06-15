@@ -50,22 +50,27 @@ public class IKControl : MonoBehaviour
           animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
 
           Vector2 v2 = new Vector2(point[15].x, point[15].y) - new Vector2(point[13].x, point[13].y);
+          Vector2 v22 = new Vector2(point[16].x, point[16].y) - new Vector2(point[14].x, point[14].y);
           float result = Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;//손과 팔꿈치 사이 각도..
+          float result2 = Mathf.Atan2(v22.y, v22.x) * Mathf.Rad2Deg;
           animator.SetIKPosition(AvatarIKGoal.RightHand, new Vector3(point[13].x + 10.0f * Mathf.Cos(result * Mathf.PI / 180),
-            point[13].y - 10.0f + 10.0f * Mathf.Sin(result * Mathf.PI / 180), 105.0f));//팔꿈치 위치에따른 손 위치를 cos,sin으로
-          //animator.SetIKPosition(AvatarIKGoal.RightHand, cube.transform.position);
-          //animator.SetIKRotation(AvatarIKGoal.RightHand, point[15]);
-         animator.SetIKPosition(AvatarIKGoal.LeftHand, point[16]);
+            (point[13].y - 10.0f) + 10.0f * Mathf.Sin(result * Mathf.PI / 180), 100.0f));
+          animator.SetIKPosition(AvatarIKGoal.LeftHand, new Vector3(point[14].x + 10.0f * Mathf.Cos(result2 * Mathf.PI / 180),
+            (point[14].y - 10.0f) + 10.0f * Mathf.Sin(result2 * Mathf.PI / 180), 104.0f));
+          //animator.SetIKPosition(AvatarIKGoal.LeftHand, cube.transform.position);
           //animator.SetIKRotation(AvatarIKGoal.LeftHand, point[16]);
-          //animator.SetIKHintPosition(AvatarIKHint.RightElbow, new Vector3(point[13].x, point[13].y -15.0f , point[13].z));
-          Debug.Log("point[13]: " + point[13]);
           animator.SetIKHintPosition(AvatarIKHint.RightElbow, new Vector3(point[13].x, point[13].y - 10.0f, 105.0f));
           //animator.SetIKHintPosition(AvatarIKHint.RightElbow, cube2.transform.position);
-          animator.SetIKHintPosition(AvatarIKHint.LeftElbow, cube2.transform.position);
+          //animator.SetIKHintPosition(AvatarIKHint.LeftElbow, cube2.transform.position);
+          animator.SetIKHintPosition(AvatarIKHint.LeftElbow, new Vector3(point[14].x, point[14].y - 10.0f, 105.0f));
           //animator.SetIKHintPosition(AvatarIKHint.RightKnee, point[25]);
           //animator.SetIKHintPosition(AvatarIKHint.LeftKnee, point[26]);
           animator.SetIKPosition(AvatarIKGoal.RightFoot, point[29]);
           animator.SetIKPosition(AvatarIKGoal.LeftFoot, point[30]);
+
+          cube.transform.position = new Vector3(point[14].x + 10.0f * Mathf.Cos(result2 * Mathf.PI / 180),
+            (point[14].y - 10.0f) + 10.0f * Mathf.Sin(result2 * Mathf.PI / 180), 104.0f);
+          cube2.transform.position = new Vector3(point[14].x, point[14].y - 10.0f, 105.0f);
 
           //Vector3 relativePos = (point[12]- point[11]);//어깨선 기준으로 vector값 추출
           ////Debug.Log("relativePos.z:" + relativePos.z * (-1.0f));
