@@ -44,8 +44,7 @@ namespace Mediapipe.Unity
       float drscale = Vector3.Magnitude(Point[15] - Point[13]) / 25;
       float upbodyscale = Vector3.Magnitude(newPosition - newPosition2);
 
-      Vector3 relativePos = (Point[12] - Point[11]);
-      if (-10 <= relativePos.z && relativePos.z <= 10)//특정 각도까지만 몸 크기를 바꾸도록... 
+      if (-0.2 <= PointListAnnotation.shoulder && PointListAnnotation.shoulder <= 0.2)//특정 각도까지만 몸 크기를 바꾸도록... 
       {
         avatar.transform.localScale = new Vector3(scale,scale, scale);
         if(0.0f < scale && scale <= 3.0f) //이 조건 없으면 에러뜸
@@ -53,8 +52,8 @@ namespace Mediapipe.Unity
           upperbody.transform.localScale = new Vector3(1.1f, 1.10f * (upbodyscale / scale / (26.0f + (scale - 0.5f) * 4.0f)), 1.0f); //가까이있을땐 30나누고 멀땐 25
           lupperleg.transform.localScale = new Vector3(1.0f, legscale, 1.0f);
           rupperleg.transform.localScale = new Vector3(1.0f, legscale, 1.0f);
-          //ldownleg.transform.localScale = new Vector3(1.0f, dlscale / scale / 0.81f, 1.0f);
-          //rdownleg.transform.localScale = new Vector3(1.0f, dlscale / scale / 0.81f, 1.0f);
+          ldownleg.transform.localScale = new Vector3(1.0f, legscale / scale / 0.81f, 1.0f);
+          rdownleg.transform.localScale = new Vector3(1.0f, legscale / scale / 0.81f, 1.0f);
           lupperarm.transform.localScale = new Vector3(1.0f, armscale, 1.0f);
           rupperarm.transform.localScale = new Vector3(1.0f, armscale, 1.0f);
           //ldownarm.transform.localScale = new Vector3(1.0f, 1.54f * (drscale / scale), 1.0f);

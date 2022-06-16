@@ -72,10 +72,9 @@ public class IKControl : MonoBehaviour
             (point[14].y - 10.0f) + 10.0f * Mathf.Sin(result2 * Mathf.PI / 180), 104.0f);
           cube2.transform.position = new Vector3(point[14].x, point[14].y - 10.0f, 105.0f);
 
-          //Vector3 relativePos = (point[12]- point[11]);//어깨선 기준으로 vector값 추출
-          ////Debug.Log("relativePos.z:" + relativePos.z * (-1.0f));
-          //Quaternion rotation = Quaternion.Euler(new Vector3(0, 180 + relativePos.z * (-1.2f), 0));
-          //animator.bodyRotation = rotation;//몸통 돌리기
+          Vector3 relativePos = (point[12] - point[11]);//어깨선 기준으로 vector값 추출
+          Quaternion rotation = Quaternion.Euler(new Vector3(0, 180 + relativePos.z * (-25.0f), 0));
+          animator.bodyRotation = rotation;//몸통 돌리기
         }
 
       }
