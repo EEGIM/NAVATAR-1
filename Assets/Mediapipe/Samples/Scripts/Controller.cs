@@ -32,7 +32,6 @@ namespace Mediapipe.Unity
     void Update()
     {
       targetPosition(PointListAnnotation.point);
-      legscale = PointListAnnotation.legscale / 9.17f;
       armscale = PointListAnnotation.armscale / 3.19f;
 
       Vector3 newPosition = new Vector3((Point[23].x + Point[24].x)/2, (Point[23].y + Point[24].y) / 2, zPoint);
@@ -50,10 +49,10 @@ namespace Mediapipe.Unity
         if(0.0f < scale && scale <= 3.0f) //이 조건 없으면 에러뜸
         {
           upperbody.transform.localScale = new Vector3(1.1f, 1.10f * (upbodyscale / scale / (26.0f + (scale - 0.5f) * 4.0f)), 1.0f); //가까이있을땐 30나누고 멀땐 25
-          lupperleg.transform.localScale = new Vector3(1.0f, legscale, 1.0f);
-          rupperleg.transform.localScale = new Vector3(1.0f, legscale, 1.0f);
-          ldownleg.transform.localScale = new Vector3(1.0f, legscale / scale / 0.81f, 1.0f);
-          rdownleg.transform.localScale = new Vector3(1.0f, legscale / scale / 0.81f, 1.0f);
+          lupperleg.transform.localScale = new Vector3(1.0f, PointListAnnotation.legscale * 0.25f, 1.0f);
+          rupperleg.transform.localScale = new Vector3(1.0f, PointListAnnotation.legscale * 0.25f, 1.0f);
+          ldownleg.transform.localScale = new Vector3(1.0f, PointListAnnotation.dlegscale * 0.27f, 1.0f);
+          rdownleg.transform.localScale = new Vector3(1.0f, PointListAnnotation.dlegscale * 0.27f, 1.0f);
           lupperarm.transform.localScale = new Vector3(1.0f, armscale, 1.0f);
           rupperarm.transform.localScale = new Vector3(1.0f, armscale, 1.0f);
           //ldownarm.transform.localScale = new Vector3(1.0f, 1.54f * (drscale / scale), 1.0f);
