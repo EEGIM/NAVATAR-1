@@ -50,7 +50,8 @@ namespace Mediapipe.Unity
         avatar.transform.localScale = new Vector3(scale,scale, scale);
         if(0.0f < scale && scale <= 3.0f) //이 조건 없으면 에러뜸
         {
-          upperbody.transform.localScale = new Vector3(1.1f, 1.10f * (upbodyscale / scale / (26.0f + (scale - 0.5f) * 4.0f)), 1.0f); //가까이있을땐 30나누고 멀땐 25
+          Debug.Log("scale: " + scale); 
+          upperbody.transform.localScale = new Vector3(1.1f, 1.10f * (upbodyscale / scale / (24.0f + (scale - 0.5f) * 4.0f)), 1.0f); //가까이있을땐 30나누고 멀땐 25
           //hips.transform.localScale = new Vector3(16.4f + hipscale / 3.73f, hips.transform.localScale.y, hips.transform.localScale.y);
           lupperleg.transform.localScale = new Vector3(1.0f, PointListAnnotation.legscale * 0.25f, 1.0f);
           rupperleg.transform.localScale = new Vector3(1.0f, PointListAnnotation.legscale * 0.25f, 1.0f);
