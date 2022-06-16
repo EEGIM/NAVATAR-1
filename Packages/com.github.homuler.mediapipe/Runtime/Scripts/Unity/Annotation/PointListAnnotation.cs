@@ -92,9 +92,10 @@ namespace Mediapipe.Unity
       Vector3 relativePos = (point[12] - point[11]);
       shoulder = relativePos.z;
 
+      Debug.Log("어깨너비: " + Vector3.Magnitude(point[11] - point[12]) + "골반너비: " + Vector3.Magnitude(point[23] - point[24]));
+
       legscale = Vector3.Magnitude(point[23] - point[25]) / Vector3.Magnitude(point[23] - point[24]);
       dlegscale = Vector3.Magnitude(point[25] - point[27]) / Vector3.Magnitude(point[23] - point[24]);
-      Debug.Log("legscale: " + legscale + "dlegscale: " + dlegscale);
       armscale = (Vector3.Magnitude(point[15] - point[13]) + Vector3.Magnitude(point[11] - point[13])) / Vector3.Magnitude(point[11] - point[12]);
       for (int i = 0; i < 33; i++)
       {
@@ -107,6 +108,10 @@ namespace Mediapipe.Unity
       {
         point[i].z = 105.0f;
         //point[i].z = zPoint + (20.0f * (a[i].Z + 0.3f));//z값 받아서 그것을 화면에 반영했을때 이상적인 비율 곱함
+      }
+      for (int i = 23; i < 33; i++)
+      {
+        point[i].z = foot;
       }
     }
 
