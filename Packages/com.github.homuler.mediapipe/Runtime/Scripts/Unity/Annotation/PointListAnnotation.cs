@@ -18,18 +18,15 @@ namespace Mediapipe.Unity
   {
     [SerializeField] private Color _color = Color.green;
     [SerializeField] private float _radius = 15.0f;
-    public static float zPoint = 90f;
+    public static float zPoint = 90f; //차후 수정 필요
     public static Vector3[] point =new Vector3[33];
     public GameObject canvas;
     public RectTransform annotation;
-    public float foot;
+    public float foot; //수정필요
     public static float legscale;
     public static float dlegscale;
     public static float armscale;
     public static float shoulder;
-    public GameObject cube;
-    public GameObject cube2;
-    public GameObject cube3;
     private void OnValidate()
     {
       ApplyColor(_color);
@@ -75,36 +72,33 @@ namespace Mediapipe.Unity
       Draw(targets.Landmark, scale, visualizeZ);
     }
 
-    public float GetAngle(Vector3 vec1, Vector3 vec2)
+    public Vector3 FloattoVect(float X, float Y, float Z)
     {
-      float theta = Vector3.Dot(vec1, vec2) / (vec1.magnitude * vec2.magnitude);
-      Vector3 dirAngle = Vector3.Cross(vec1, vec2);
-      float angle = Mathf.Acos(theta) * Mathf.Rad2Deg;
-      if (dirAngle.z < 0.0f) angle = 360 - angle;
-      return angle;
+      Vector3 vector;
+      vector = new Vector3(X, Y, Z);
+      return vector;
     }
 
     void targetPosition(IList<NormalizedLandmark> a)
     {
-      point[23] = new Vector3(a[23].X, a[23].Y, a[23].Z); point[24] = new Vector3(a[24].X, a[24].Y, a[24].Z); point[25] = new Vector3(a[25].X, a[25].Y, a[25].Z); point[27] = new Vector3(a[27].X, a[27].Y, a[27].Z);
-      point[11] = new Vector3(a[11].X, a[11].Y, a[11].Z); point[13] = new Vector3(a[13].X, a[13].Y, a[13].Z); point[15] = new Vector3(a[15].X, a[15].Y, a[15].Z);
-      point[12] = new Vector3(a[12].X, a[12].Y, a[12].Z);
-      Vector3 relativePos = (point[12] - point[11]);
-      shoulder = relativePos.z;
-
-      //Debug.Log("어깨너비: " + Vector3.Magnitude(point[11] - point[12]) + "골반너비: " + Vector3.Magnitude(point[23] - point[24]));
-
-      legscale = Vector3.Magnitude(point[23] - point[25]) / Vector3.Magnitude(point[23] - point[24]);
-      dlegscale = Vector3.Magnitude(point[25] - point[27]) / Vector3.Magnitude(point[23] - point[24]);
-      armscale = (Vector3.Magnitude(point[15] - point[13]) + Vector3.Magnitude(point[11] - point[13])) / Vector3.Magnitude(point[11] - point[12]);
       for (int i = 0; i < 33; i++)
       {
-        point[i] = new Vector3((0.5f - a[i].X) * annotation.rect.width * 0.04f, (0.5f - a[i].Y) * annotation.rect.height * 0.04f, zPoint); //좌표위치와 똑같이 수정, 캔버스 크기가 바뀌더라도 고치면 안됨.
-                                                                                              //좌표의 위치를 결정짓는 실제 스크린 크기는 변하지 않으므로 
+        point[i] = FloattoVect(a[i].X, a[i].Y, a[i].Z);//a의 형식을 Vector3 리스트인 point로 고침
+      }
+      shoulder = (point[12] - point[11]).z;//IK Control 에서 어깨 회전 하기 위해 z축을 살리는 작업.. 
+
+      legscale = Vector3.Magnitude(point[23] - point[25]) / Vector3.Magnitude(point[23] - point[24]); //Controller.cs에서 몸 scale을 조절하기 위해 필요한 float값..
+      dlegscale = Vector3.Magnitude(point[25] - point[27]) / Vector3.Magnitude(point[23] - point[24]);
+      //armscale = (Vector3.Magnitude(point[15] - point[13]) + Vector3.Magnitude(point[11] - point[13])) / Vector3.Magnitude(point[11] - point[12]);
+
+      for (int i = 0; i < 33; i++)
+      {
+        point[i] = new Vector3((0.5f - a[i].X) * annotation.rect.width * 0.04f, (0.5f - a[i].Y) * annotation.rect.height * 0.04f, zPoint); //좌표위치와 똑같이 수정, 캔버스 크기가 바뀌더라도 고치면 안됨
       }
       point[11].z -= shoulder;
-      point[12].z += shoulder;
-      for (int i = 13; i < 23; i++)
+      point[12].z += shoulder;//어깨회전 z축 좌표 조정
+
+      for (int i = 13; i < 23; i++) //차후 수정 필요 (103~ 116)
       {
         if(a[i].Z + 0.3f >= -5.0f)
         {
@@ -120,10 +114,6 @@ namespace Mediapipe.Unity
           point[i + 1].x += 0.5f;
         }
       }
-      //Vector3 newPosition = new Vector3((point[23].x + point[24].x) / 2, (point[23].y + point[24].y) / 2, zPoint);
-      //Vector3 newPosition2 = new Vector3((point[11].x + point[12].x) / 2, (point[11].y + point[12].y) / 2, zPoint);
-      //Debug.Log("골반너비 * 2 / 어깨너비:" + Vector3.Magnitude(point[23] - point[24]) * 2 / Vector3.Magnitude(point[11] - point[12]));
-      //Debug.Log("세로너비/ 가로너비:" + Vector3.Magnitude(newPosition - newPosition2) / Vector3.Magnitude(point[11] - point[12]));
     }
 
     public void Draw(IList<NormalizedLandmark> targets, bool visualizeZ = true)
