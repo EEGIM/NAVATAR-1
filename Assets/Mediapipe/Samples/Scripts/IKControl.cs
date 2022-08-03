@@ -9,10 +9,9 @@ public class IKControl : MonoBehaviour
 
   protected Animator animator;
   public bool ikActive = false;
-  public GameObject cube;
-    public GameObject cube2;
-    public GameObject cube3;
+  public GameObject gm;
   float z;
+  float a = 0.0f;
 
 
   private Vector3[] point = new Vector3[33];
@@ -53,27 +52,20 @@ public class IKControl : MonoBehaviour
           Vector2 v22 = new Vector2(point[16].x, point[16].y) - new Vector2(point[14].x, point[14].y);
           float result = Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;//손과 팔꿈치 사이 각도..
           float result2 = Mathf.Atan2(v22.y, v22.x) * Mathf.Rad2Deg;
-          animator.SetIKPosition(AvatarIKGoal.RightHand, new Vector3(point[13].x + 10.0f * Mathf.Cos(result * Mathf.PI / 180),
-            (point[13].y - 10.0f) + 10.0f * Mathf.Sin(result * Mathf.PI / 180), 105.0f));
-          animator.SetIKPosition(AvatarIKGoal.LeftHand, new Vector3(point[14].x + 10.0f * Mathf.Cos(result2 * Mathf.PI / 180),
-            (point[14].y - 10.0f) + 10.0f * Mathf.Sin(result2 * Mathf.PI / 180), 105.0f));
-          //animator.SetIKPosition(AvatarIKGoal.LeftHand, cube.transform.position);
+          animator.SetIKPosition(AvatarIKGoal.RightHand, new Vector3(point[13].x - a + 10.0f * Mathf.Cos(result * Mathf.PI / 180),
+            (point[13].y - 10.0f) + 10.0f * Mathf.Sin(result * Mathf.PI / 180), point[15].z));
+          animator.SetIKPosition(AvatarIKGoal.LeftHand, new Vector3(point[14].x + a + 10.0f * Mathf.Cos(result2 * Mathf.PI / 180),
+            (point[14].y - 10.0f) + 10.0f * Mathf.Sin(result2 * Mathf.PI / 180), point[16].z));
           //animator.SetIKRotation(AvatarIKGoal.LeftHand, point[16]);
-          animator.SetIKHintPosition(AvatarIKHint.RightElbow, new Vector3(point[13].x, point[13].y - 10.0f, 105.0f));
-          //animator.SetIKHintPosition(AvatarIKHint.RightElbow, cube2.transform.position);
-          //animator.SetIKHintPosition(AvatarIKHint.LeftElbow, cube2.transform.position);
-          animator.SetIKHintPosition(AvatarIKHint.LeftElbow, new Vector3(point[14].x, point[14].y - 10.0f, 105.0f));
+          animator.SetIKHintPosition(AvatarIKHint.RightElbow, new Vector3(point[13].x + 3.0f, point[13].y - 10.0f, 105.0f));
+          animator.SetIKHintPosition(AvatarIKHint.LeftElbow, new Vector3(point[14].x - 3.0f, point[14].y - 10.0f, 105.0f));
           animator.SetIKHintPosition(AvatarIKHint.RightKnee, point[25]);
           animator.SetIKHintPosition(AvatarIKHint.LeftKnee, point[26]);
-          animator.SetIKPosition(AvatarIKGoal.RightFoot, point[31]);
-          animator.SetIKPosition(AvatarIKGoal.LeftFoot, point[32]);
-
-          cube.transform.position = new Vector3(point[14].x + 10.0f * Mathf.Cos(result2 * Mathf.PI / 180),
-            (point[14].y - 10.0f) + 10.0f * Mathf.Sin(result2 * Mathf.PI / 180), 104.0f);
-          cube2.transform.position = new Vector3(point[14].x, point[14].y - 10.0f, 105.0f);
+          animator.SetIKPosition(AvatarIKGoal.RightFoot, point[29]);
+          animator.SetIKPosition(AvatarIKGoal.LeftFoot, point[30]);
 
           Vector3 relativePos = (point[12] - point[11]);//어깨선 기준으로 vector값 추출
-          Quaternion rotation = Quaternion.Euler(new Vector3(0, 180 + relativePos.z * (-25.0f), 0));
+          Quaternion rotation = Quaternion.Euler(new Vector3(0, 180 + relativePos.z * (-25.0f) - 3.0f, 0));
           animator.bodyRotation = rotation;//몸통 돌리기
         }
 

@@ -13,6 +13,7 @@ namespace Mediapipe.Unity
     public GameObject rupperleg; public GameObject rdownleg; public GameObject lupperleg; public GameObject ldownleg;
     public GameObject upperbody; public GameObject hips; public GameObject spine2;
     public GameObject avatar;
+    public RectTransform canvas;
     private static float legscale;
     private static float armscale;
     private Vector3[] Point = new Vector3[33];
@@ -33,10 +34,16 @@ namespace Mediapipe.Unity
     {
       targetPosition(PointListAnnotation.point);
       armscale = PointListAnnotation.armscale / 3.19f;
-
+      //Debug.Log("w:" + canvas.rect.width + "h:" + canvas.rect.height + "scale:" + canvas.localScale.x);
       Vector3 newPosition = new Vector3((Point[23].x + Point[24].x)/2, (Point[23].y + Point[24].y) / 2, zPoint);
       Vector3 newPosition2 = new Vector3((Point[11].x + Point[12].x) / 2, (Point[11].y + Point[12].y) / 2, zPoint);
-      avatar.transform.position = newPosition;
+      //if ((canvas.rect.width * canvas.localScale.x * -1.0f / 2) <= (float)Point[0].x && (float)Point[0].x <= (canvas.rect.width * canvas.localScale.x / 2) &&
+      //  (canvas.rect.height * canvas.localScale.y * -1.0f / 2) <= (float)Point[0].y && (float)Point[0].y <= (canvas.rect.width * canvas.localScale.x / 2))
+       avatar.transform.position = newPosition;
+      //else
+      //{
+      //  avatar.transform.position = new Vector3(150.0f, 150.0f, 0.0f);
+      //}
 
       float scale = Vector3.Magnitude(Point[11] - Point[12]) / 25; //몸 크기를 어깨 벡터 크기 비례로
       float hipscale = Vector3.Magnitude(Point[23] - Point[24]) / scale; //몸 크기를 어깨 벡터 크기 비례로
@@ -50,18 +57,18 @@ namespace Mediapipe.Unity
         avatar.transform.localScale = new Vector3(scale,scale, scale);
         if(0.0f < scale && scale <= 3.0f) //이 조건 없으면 에러뜸
         {
-          Debug.Log("scale: " + scale); 
-          upperbody.transform.localScale = new Vector3(1.1f, 1.10f * (upbodyscale / scale / (24.0f + (scale - 0.5f) * 4.0f)), 1.0f); //가까이있을땐 30나누고 멀땐 25
+          //Debug.Log("scale: " + scale); 
+          upperbody.transform.localScale = new Vector3(1.1f, 1.10f * (upbodyscale / scale / (24.0f + (scale - 0.3f) * 4.2f)), 1.0f); //가까이있을땐 30나누고 멀땐 25
           //hips.transform.localScale = new Vector3(16.4f + hipscale / 3.73f, hips.transform.localScale.y, hips.transform.localScale.y);
-          lupperleg.transform.localScale = new Vector3(1.0f, PointListAnnotation.legscale * 0.25f, 1.0f);
-          rupperleg.transform.localScale = new Vector3(1.0f, PointListAnnotation.legscale * 0.25f, 1.0f);
-          if(PointListAnnotation.dlegscale * 0.27f >= 1.2f)
+          if(PointListAnnotation.dlegscale * 0.27f >= 1.2f || PointListAnnotation.legscale * 0.25f >= 0.80f)
           {
+            lupperleg.transform.localScale = new Vector3(lupperleg.transform.localScale.x, PointListAnnotation.legscale * 0.26f, 1.0f);
+            rupperleg.transform.localScale = new Vector3(lupperleg.transform.localScale.x, PointListAnnotation.legscale * 0.26f, 1.0f);
             ldownleg.transform.localScale = new Vector3(1.0f, PointListAnnotation.dlegscale * 0.27f, 1.0f);
             rdownleg.transform.localScale = new Vector3(1.0f, PointListAnnotation.dlegscale * 0.27f, 1.0f);
           }
-          lupperarm.transform.localScale = new Vector3(1.0f, armscale, 1.0f);
-          rupperarm.transform.localScale = new Vector3(1.0f, armscale, 1.0f);
+          //lupperarm.transform.localScale = new Vector3(lupperarm.transform.localScale.x, armscale, 1.0f);
+          //rupperarm.transform.localScale = new Vector3(rupperarm.transform.localScale.x, armscale, 1.0f);
           //ldownarm.transform.localScale = new Vector3(1.0f, 1.54f * (drscale / scale), 1.0f);
           //rdownarm.transform.localScale = new Vector3(1.0f, 1.54f * (drscale / scale), 1.0f);
         }

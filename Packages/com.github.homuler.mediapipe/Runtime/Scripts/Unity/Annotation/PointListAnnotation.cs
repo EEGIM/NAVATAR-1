@@ -21,6 +21,7 @@ namespace Mediapipe.Unity
     public static float zPoint = 90f;
     public static Vector3[] point =new Vector3[33];
     public GameObject canvas;
+    public RectTransform annotation;
     public float foot;
     public static float legscale;
     public static float dlegscale;
@@ -88,7 +89,6 @@ namespace Mediapipe.Unity
       point[23] = new Vector3(a[23].X, a[23].Y, a[23].Z); point[24] = new Vector3(a[24].X, a[24].Y, a[24].Z); point[25] = new Vector3(a[25].X, a[25].Y, a[25].Z); point[27] = new Vector3(a[27].X, a[27].Y, a[27].Z);
       point[11] = new Vector3(a[11].X, a[11].Y, a[11].Z); point[13] = new Vector3(a[13].X, a[13].Y, a[13].Z); point[15] = new Vector3(a[15].X, a[15].Y, a[15].Z);
       point[12] = new Vector3(a[12].X, a[12].Y, a[12].Z);
-
       Vector3 relativePos = (point[12] - point[11]);
       shoulder = relativePos.z;
 
@@ -99,20 +99,31 @@ namespace Mediapipe.Unity
       armscale = (Vector3.Magnitude(point[15] - point[13]) + Vector3.Magnitude(point[11] - point[13])) / Vector3.Magnitude(point[11] - point[12]);
       for (int i = 0; i < 33; i++)
       {
-        point[i] = new Vector3((0.5f - a[i].X) * 2440 * 0.04f, (0.5f - a[i].Y) * 1275 * 0.04f, zPoint); //좌표위치와 똑같이 수정, 캔버스 크기가 바뀌더라도 고치면 안됨.
+        point[i] = new Vector3((0.5f - a[i].X) * annotation.rect.width * 0.04f, (0.5f - a[i].Y) * annotation.rect.height * 0.04f, zPoint); //좌표위치와 똑같이 수정, 캔버스 크기가 바뀌더라도 고치면 안됨.
                                                                                               //좌표의 위치를 결정짓는 실제 스크린 크기는 변하지 않으므로 
       }
       point[11].z -= shoulder;
       point[12].z += shoulder;
       for (int i = 13; i < 23; i++)
       {
-        point[i].z = 105.0f;
-        //point[i].z = zPoint + (20.0f * (a[i].Z + 0.3f));//z값 받아서 그것을 화면에 반영했을때 이상적인 비율 곱함
+        if(a[i].Z + 0.3f >= -5.0f)
+        {
+          point[i].z = 95.0f + (50.0f * (a[i].Z + 0.3f));//z값 받아서 그것을 화면에 반영했을때 이상적인 비율 곱함 (scale별로 다르게 설정해야...)
+        }
       }
       for (int i = 23; i < 33; i++)
       {
         point[i].z = foot;
+        if (i >= 27 && i % 2 == 1)
+        {
+          point[i].x -= 0.5f;
+          point[i + 1].x += 0.5f;
+        }
       }
+      //Vector3 newPosition = new Vector3((point[23].x + point[24].x) / 2, (point[23].y + point[24].y) / 2, zPoint);
+      //Vector3 newPosition2 = new Vector3((point[11].x + point[12].x) / 2, (point[11].y + point[12].y) / 2, zPoint);
+      //Debug.Log("골반너비 * 2 / 어깨너비:" + Vector3.Magnitude(point[23] - point[24]) * 2 / Vector3.Magnitude(point[11] - point[12]));
+      //Debug.Log("세로너비/ 가로너비:" + Vector3.Magnitude(newPosition - newPosition2) / Vector3.Magnitude(point[11] - point[12]));
     }
 
     public void Draw(IList<NormalizedLandmark> targets, bool visualizeZ = true)

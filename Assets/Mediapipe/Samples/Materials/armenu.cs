@@ -10,6 +10,7 @@ public class armenu : MonoBehaviour
 {
   public GameObject menu;
   public GameObject bigmenu;
+  public GameObject header;
   public List<GameObject> panels = new List<GameObject>();
   public Text text;
   public RawImage rawImage;
@@ -36,6 +37,20 @@ public class armenu : MonoBehaviour
     {
       menu.SetActive(true);
       bigmenu.SetActive(false);
+    }
+  }
+
+  public void OnClickturnButton()
+  {
+    if (menu.gameObject.activeSelf == true)
+    {
+      menu.SetActive(false);
+      //header.SetActive(false);
+    }
+    if (menu.gameObject.activeSelf == false)
+    {
+      menu.SetActive(true);
+      //header.SetActive(true);
     }
   }
 
